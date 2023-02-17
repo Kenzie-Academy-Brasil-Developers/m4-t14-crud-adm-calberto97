@@ -18,12 +18,10 @@ export const validateToken = async (
     String(process.env.SECRET_KEY),
     (error: any, decoded: any) => {
       if (error) {
-        return response
-          .status(401)
-          .json({message: "Missing Bearer Token"});
+        return response.status(401).json({ message: error.message });
       }
-      
-      request.user = { email: decoded.email }
+
+      request.user = { email: decoded.email };
       return next();
     }
   );
